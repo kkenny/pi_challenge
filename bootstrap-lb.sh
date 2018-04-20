@@ -13,7 +13,8 @@ curl -L https://omnitruck.chef.io/install.sh | bash || error_exit 'could not ins
 cat > "/etc/chef/first-boot.json" << EOF
 {
    "run_list" :[
-   "recipe[default-packages]"
+   "recipe[default-packages]",
+   "recipe[haproxy]"
    ]
 }
 EOF
