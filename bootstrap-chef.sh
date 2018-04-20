@@ -27,7 +27,7 @@ chmod 0644 /var/www/lighttpd/darkstar-validator.pem
 
 git clone https://github.com/kkenny/darkstar-chef.git /root/src/darkstar-chef
 
-knife configure --admin-client-key /root/.chef/chef-admin.pem --admin-client-name chef-admin -d -s 'https://localhost/organizations/darkstar/' --validation-client-name darkstar-validator --validation-key /root/.chef/darkstar-validator.pem -u chef-admin -r /root/src/darkstar-chef
+knife configure --admin-client-key /root/.chef/chef-admin.pem --admin-client-name chef-admin -d -s 'https://chef/organizations/darkstar/' --validation-client-name darkstar-validator --validation-key /root/.chef/darkstar-validator.pem -u chef-admin -r /root/src/darkstar-chef
 
 knife ssl fetch
 
