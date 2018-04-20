@@ -27,6 +27,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "lb1" do |lb1|
     lb1.vm.network "private_network", ip: "10.0.0.4", netmask: "255.255.255.0"
+    lb1.vm.network "forwarded_port", guest: 80, host: 8080
     lb1.vm.hostname = "lb1"
     lb1.vm.box = "centos/7"
     lb1.vm.provision "shell", path: "bootstrap-lb.sh"
