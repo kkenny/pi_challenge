@@ -56,7 +56,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "web3" do |web3|
     web3.vm.network "private_network", ip: "10.0.0.8", netmask: "255.255.255.0"
-    web3.vm.hostname = "web4"
+    web3.vm.hostname = "web3"
     web3.vm.box = "centos/7"
     web3.vm.provision "shell", path: "bootstrap-web.sh"
   end
