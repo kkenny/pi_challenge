@@ -25,19 +25,18 @@ Vagrant.configure("2") do |config|
     chef.vm.provision "shell", path: "bootstrap-chef.sh"
   end
 
-  config.vm.define "lb1" do |lb1|
-    lb1.vm.network "private_network", ip: "10.0.0.4", netmask: "255.255.255.0"
-    lb1.vm.network "forwarded_port", guest: 80, host: 8080
-    lb1.vm.hostname = "lb1"
-    lb1.vm.box = "centos/7"
-    lb1.vm.provision "shell", path: "bootstrap-lb-master.sh"
+  config.vm.define "db1" do |db1|
+    db1.vm.network "private_network", ip: "10.0.0.9", netmask: "255.255.255.0"
+    db1.vm.hostname = "db1"
+    db1.vm.box = "centos/7"
+    db1.vm.provision "shell", path: "bootstrap-db-master.sh"
   end
 
-  config.vm.define "lb2" do |lb2|
-    lb2.vm.network "private_network", ip: "10.0.0.5", netmask: "255.255.255.0"
-    lb2.vm.hostname = "lb2"
-    lb2.vm.box = "centos/7"
-    lb2.vm.provision "shell", path: "bootstrap-lb-slave.sh"
+  config.vm.define "db2" do |db2|
+    db2.vm.network "private_network", ip: "10.0.0.10", netmask: "255.255.255.0"
+    db2.vm.hostname = "db2"
+    db2.vm.box = "centos/7"
+    db2.vm.provision "shell", path: "bootstrap-db-slave.sh"
   end
 
   config.vm.define "web1" do |web1|
@@ -61,17 +60,18 @@ Vagrant.configure("2") do |config|
     web3.vm.provision "shell", path: "bootstrap-web.sh"
   end
 
-  config.vm.define "db1" do |db1|
-    db1.vm.network "private_network", ip: "10.0.0.9", netmask: "255.255.255.0"
-    db1.vm.hostname = "db1"
-    db1.vm.box = "centos/7"
-    db1.vm.provision "shell", path: "bootstrap-db-master.sh"
+  config.vm.define "lb1" do |lb1|
+    lb1.vm.network "private_network", ip: "10.0.0.4", netmask: "255.255.255.0"
+    lb1.vm.network "forwarded_port", guest: 80, host: 8080
+    lb1.vm.hostname = "lb1"
+    lb1.vm.box = "centos/7"
+    lb1.vm.provision "shell", path: "bootstrap-lb-master.sh"
   end
 
-  config.vm.define "db2" do |db2|
-    db2.vm.network "private_network", ip: "10.0.0.10", netmask: "255.255.255.0"
-    db2.vm.hostname = "db2"
-    db2.vm.box = "centos/7"
-    db2.vm.provision "shell", path: "bootstrap-db-slave.sh"
+  config.vm.define "lb2" do |lb2|
+    lb2.vm.network "private_network", ip: "10.0.0.5", netmask: "255.255.255.0"
+    lb2.vm.hostname = "lb2"
+    lb2.vm.box = "centos/7"
+    lb2.vm.provision "shell", path: "bootstrap-lb-slave.sh"
   end
 end
