@@ -30,14 +30,14 @@ Vagrant.configure("2") do |config|
     lb1.vm.network "forwarded_port", guest: 80, host: 8080
     lb1.vm.hostname = "lb1"
     lb1.vm.box = "centos/7"
-    lb1.vm.provision "shell", path: "bootstrap-lb.sh"
+    lb1.vm.provision "shell", path: "bootstrap-lb-master.sh"
   end
 
   config.vm.define "lb2" do |lb2|
     lb2.vm.network "private_network", ip: "10.0.0.5", netmask: "255.255.255.0"
     lb2.vm.hostname = "lb2"
     lb2.vm.box = "centos/7"
-    lb2.vm.provision "shell", path: "bootstrap-lb.sh"
+    lb2.vm.provision "shell", path: "bootstrap-lb-slave.sh"
   end
 
   config.vm.define "web1" do |web1|
@@ -56,7 +56,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "web3" do |web3|
     web3.vm.network "private_network", ip: "10.0.0.8", netmask: "255.255.255.0"
-    web3.vm.hostname = "web4"
+    web3.vm.hostname = "web3"
     web3.vm.box = "centos/7"
     web3.vm.provision "shell", path: "bootstrap-web.sh"
   end
