@@ -17,13 +17,22 @@ systemctl start lighttpd
 yum -y --nogpgcheck install https://packages.chef.io/files/stable/chef-server/12.15.8/el/7/chef-server-core-12.15.8-1.el7.x86_64.rpm
 yum -y --nogpgcheck install https://packages.chef.io/files/stable/chefdk/2.5.3/el/7/chefdk-2.5.3-1.el7.x86_64.rpm
 
+#Since chef is not verbose at all...
+echo -n "Configuring Chef Server... "
 chef-server-ctl reconfigure
+echo "Done."
+echo -n "Creating Admin User for Chef... "
 chef-server-ctl user-create chef-admin Chef Admin chef-admin@example.com 'iamtheadmin1' --filename /root/.chef/chef-admin.pem
+echo "Done."
+echo -n "Creating Chef Organization... "
 chef-server-ctl org-create darkstar 'darkstar' --association_user chef-admin --filename /root/.chef/darkstar-validator.pem
+echo "Done."
 
 ### This is insecure but is necessary for automating the demo
+echo -n "Deploying validation pem... "
 cp /root/.chef/darkstar-validator.pem /var/www/lighttpd/
 chmod 0644 /var/www/lighttpd/darkstar-validator.pem
+echo "Done."
 
 git clone https://github.com/kkenny/darkstar-chef.git /root/src/darkstar-chef
 
