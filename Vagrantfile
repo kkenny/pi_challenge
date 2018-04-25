@@ -61,17 +61,24 @@ Vagrant.configure("2") do |config|
     lb2.vm.provision "shell", path: "bootstrap-lb-slave.sh"
   end
 
-  config.vm.define "db1" do |db1|
+  config.vm.define "db1", autostart: false do |db1|
     db1.vm.network "private_network", ip: "10.0.0.9", netmask: "255.255.255.0"
     db1.vm.hostname = "db1"
     db1.vm.box = "centos/7"
     db1.vm.provision "shell", path: "bootstrap-db-master.sh"
   end
 
-  config.vm.define "db2" do |db2|
+  config.vm.define "db2", autostart: false do |db2|
     db2.vm.network "private_network", ip: "10.0.0.10", netmask: "255.255.255.0"
     db2.vm.hostname = "db2"
     db2.vm.box = "centos/7"
     db2.vm.provision "shell", path: "bootstrap-db-slave.sh"
+  end
+
+  config.vm.define "jenkins", autostart: false do |jenkins|
+    jenkins.vm.network "private_network", ip: "10.0.0.11", netmask: "255.255.255.0"
+    jenkins.vm.hostname = "jenkins"
+    jenkins.vm.box = "centos/7"
+    jenkins.vm.provision "shell", path: "bootstrap-jenkins.sh"
   end
 end
