@@ -27,4 +27,4 @@ EOF
 
 knife ssl fetch -c /etc/chef/client.rb
 
-chef-client -j /etc/chef/first-boot.json
+chef-client -j /etc/chef/first-boot.json --chef-license accept
